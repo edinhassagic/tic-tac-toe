@@ -1,124 +1,118 @@
-function  Game() {
+import { useState } from "react";
+
+const Square = props => {
     
-const X_CLASS = 'x'
-const CIRCLE_CLASS = 'circle'
-const WINNING_COMBINATIONS = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6]
-]
-const cellElements = document.querySelectorAll('[data-cell]')
-const board = document.getElementById('board')
-const winningMessageElement = document.getElementById('winningMessage')
-const restartButton = document.getElementById('restartButton')
-const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
-let circleTurn
-
-  startGame()
-
-restartButton.addEventListener('click', startGame)
-
-function startGame() {
-  circleTurn = false
-  cellElements.forEach(cell => {
-    cell.classList.remove(X_CLASS)
-    cell.classList.remove(CIRCLE_CLASS)
-    cell.removeEventListener('click', handleClick)
-    cell.addEventListener('click', handleClick, { once: true })
-  })
-  setBoardHoverClass()
-  winningMessageElement.classList.remove('show')
-}
-
-function handleClick(e) {
-  const cell = e.target
-  const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS
-  placeMark(cell, currentClass)
-  if (checkWin(currentClass)) {
-    endGame(false)
-  } else if (isDraw()) {
-    endGame(true)
-  } else {
-    swapTurns()
-    setBoardHoverClass()
-  }
-}
-
-function endGame(draw) {
-  if (draw) {
-    winningMessageTextElement.innerText = 'Draw!'
-  } else {
-    winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`
-  }
-  winningMessageElement.classList.add('show')
-}
-
-function isDraw() {
-  return [...cellElements].every(cell => {
-    return cell.classList.contains(X_CLASS) || cell.classList.contains(CIRCLE_CLASS)
-  })
-}
-
-function placeMark(cell, currentClass) {
-  cell.classList.add(currentClass)
-}
-
-function swapTurns() {
-  circleTurn = !circleTurn
-}
-
-function setBoardHoverClass() {
-  board.classList.remove(X_CLASS)
-  board.classList.remove(CIRCLE_CLASS)
-  if (circleTurn) {
-    board.classList.add(CIRCLE_CLASS)
-  } else {
-    board.classList.add(X_CLASS)
-  }
-}
-
-function checkWin(currentClass) {
-  return WINNING_COMBINATIONS.some(combination => {
-    return combination.every(index => {
-      return cellElements[index].classList.contains(currentClass)
-    })
-  })
-}
- return (
-     
+      return (
+        <button className="square"
+        onClick = {props.onClick}
+        >
+          {props.value}
+        </button>
+      );
     
-     
-     <div className="board" id="board">
+  }
+  
+  const Board = props => {
+      const initialSquares = Array(9).fill(null);
+    const [squares, setSquares] = useState(initialSquares);
+    const [xIsNext, setXIsNext] = useState(true)
+    
+    const handleClick = i => {
+        const newSquares = [...squares];
+        const winnerDeclared = Boolean(calculateWinner(newSquares));
+        const squareAlreadyFilled = Boolean(newSquares[i]);
+        if (winnerDeclared || squareAlreadyFilled ) return;
+        
+        newSquares[i] = xIsNext ?  'X' : 'O';
+        setSquares(newSquares);
+        setXIsNext(!xIsNext);
+        
+        
+    };
+    
+    
+    
+    const renderSquare = i => {
+      return (
 
-<div className="cell" data-cell></div>
-<div className="cell" data-cell></div>
-<div className="cell" data-cell></div>
-<div className="cell" data-cell></div>
-<div className="cell" data-cell></div>
-<div className="cell" data-cell></div>
-<div className="cell" data-cell></div>
-<div className="cell" data-cell></div>
-<div className="cell" data-cell></div>
+       <Square value = {squares[i]} 
+      onClick={ () => handleClick(i)} />
+      );
+    }
+  
+    const winner = calculateWinner(squares);
+        const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}` ;
+      
+  
+      return (
+        <div>
+          <div className="status">{status}</div>
+          <div className="board-row">
+            {renderSquare(0)}
+            {renderSquare(1)}
+            {renderSquare(2)}
+          </div>
+          <div className="board-row">
+            {renderSquare(3)}
+            {renderSquare(4)}
+            {renderSquare(5)}
+          </div>
+          <div className="board-row">
+            {renderSquare(6)}
+            {renderSquare(7)}
+            {renderSquare(8)}
+          </div>
+        </div>
+      );
+    
+  }
+  
+  const Game = props => {
+    
+      return (
+        <div className="game">
+          <div className="game-board">
+            <Board />
+          </div>
+          <div className="game-info">
+            <div>{/* status */}</div>
+            <ol>{/* TODO */}</ol>
+          </div>
+        </div>
+      );
+    
+  }
+  
 
-<div className="winning-message " id="winningMessage">
-    <div data-winning-message-text></div>
-    <button id="restartButton">Restart</button>
-</div>
-
-
-     </div>
-
- )
-   
-
-   
-}
-
-
-
-export default Game;
+function calculateWinner(squares) {
+    
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ]; // shows all of the winning combinations ("lines")
+  
+    // Iterate over all the winning line combinations to see if the 
+    // input squares array has one of the with all 'X's or all 'O's.
+    // If it does, return 'X' or 'O'.
+    for (let line of lines) {
+      const [a, b, c] = line;
+      if (
+        squares[a] && squares[a] === squares[b] && squares[a] === squares[c]
+      ) {
+        return squares[a];
+      } else if(!squares.includes(null)){
+        return 'No winner (DRAW)';
+    }
+    }
+    // If none of the winning line combinations is contained in 
+    // input squares array, return null...
+    return null;
+  }
+  
+  export default Game;
