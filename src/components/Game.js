@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Navbar from "./Navbar";
+
 
 const Square = props => {
     
@@ -12,7 +14,7 @@ const Square = props => {
     
   }
   
-  const Board = props => {
+  const Board = ({PlayerX , PlayerO}) => {
       const initialSquares = Array(9).fill(null);
     const [squares, setSquares] = useState(initialSquares);
     const [xIsNext, setXIsNext] = useState(true)
@@ -34,6 +36,7 @@ const Square = props => {
     
     const renderSquare = i => {
       return (
+        
 
        <Square value = {squares[i]} 
       onClick={ () => handleClick(i)} />
@@ -41,11 +44,24 @@ const Square = props => {
     }
   
     const winner = calculateWinner(squares);
-        const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}` ;
+    const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? PlayerX : PlayerO }` ;
       
-  
+     /* useEffect(() => {
+        if (winner === 'X') {
+         return PlayerX;
+        } else if ( winner === 'O') {
+          return PlayerO;
+        }
+      },[winner, PlayerX, PlayerO]) 
+      */
+
+      
+       
       return (
+        
         <div>
+          <Navbar/>
+          
           <div className="status">{status}</div>
           <div className="board-row">
             {renderSquare(0)}
@@ -68,11 +84,15 @@ const Square = props => {
   }
   
   const Game = props => {
+
+    const PlayerX = localStorage.getItem('firstPlayer');
+    const PlayerO = localStorage.getItem('secondPlayer');
     
       return (
         <div className="game">
           <div className="game-board">
-            <Board />
+            
+            <Board PlayerX={PlayerX} PlayerO={PlayerO} />
           </div>
           <div className="game-info">
             <div>{/* status */}</div>
@@ -106,6 +126,8 @@ function calculateWinner(squares) {
         squares[a] && squares[a] === squares[b] && squares[a] === squares[c]
       ) {
         return squares[a];
+          
+        
       } else if(!squares.includes(null)){
         return 'No winner (DRAW)';
     }

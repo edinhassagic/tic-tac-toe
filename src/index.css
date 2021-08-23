@@ -64,3 +64,27 @@ body {
       padding-left: 50rem;
   }
   
+  header{
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    background-color: white;
+    color: black;
+    z-index: 999;
+    
+    
+}
+
+header {
+  top: 0;
+    height: 74px;
+    border-bottom: solid black 1px;
+    padding: 4px;
+    
+}
+
+.navbar {
+  float: left;
+
+
+}

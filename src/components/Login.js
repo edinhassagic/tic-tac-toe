@@ -10,9 +10,11 @@ function Login() {
   const [secondPlayer, setsecondPlayer] = useState("")
   
 
- const Start = () => {
+ const start = () => {
     if(firstPlayer && secondPlayer)
     {   
+        localStorage.setItem('firstPlayer', firstPlayer);
+        localStorage.setItem('secondPlayer', secondPlayer);
         history.push('/game')}
  }
 
@@ -39,7 +41,7 @@ function Login() {
       />
 
       <button
-        onClick={Start}
+        onClick={start}
         className="btn btn-primary mt-2"
       >
         Start

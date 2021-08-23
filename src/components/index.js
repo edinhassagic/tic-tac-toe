@@ -1,4 +1,5 @@
 import Login from "./Login";
 import Game from "./Game";
+import Navbar from "./Navbar";
 
-export {Login, Game}
+export {Login, Game, Navbar}
