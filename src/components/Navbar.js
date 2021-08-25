@@ -1,10 +1,26 @@
 import React from 'react';
 
+
+
+
+
 const Navbar = () => {
-return (
+
+
+    
+    
+    
+
+    return (
+        
+       
     <header>
+         
 <div className="navbar">
-   <p>Tic Tac Toe</p>
+   <p>Tic Tac Toe</p> 
+   
+    
+
   
 </div>
 

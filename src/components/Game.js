@@ -19,6 +19,8 @@ const Square = props => {
     const [squares, setSquares] = useState(initialSquares);
     const [xIsNext, setXIsNext] = useState(true)
     
+    
+    
     const handleClick = i => {
         const newSquares = [...squares];
         const winnerDeclared = Boolean(calculateWinner(newSquares));
@@ -32,6 +34,12 @@ const Square = props => {
         
     };
     
+    const reset = () => {
+setSquares(initialSquares)
+setXIsNext(PlayerX)
+    }
+
+
     
     
     const renderSquare = i => {
@@ -44,17 +52,29 @@ const Square = props => {
     }
   
     const winner = calculateWinner(squares);
-    const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? PlayerX : PlayerO }` ;
-      
-     /* useEffect(() => {
-        if (winner === 'X') {
-         return PlayerX;
-        } else if ( winner === 'O') {
-          return PlayerO;
-        }
-      },[winner, PlayerX, PlayerO]) 
-      */
+    let winnerText  = "X";
 
+    // const [plX, setplX] = useState(0)
+    /*
+    const [plY, setplY] = useState(0)
+    const [plDraw, setplDraw] = useState(0) */
+ 
+        
+        if (winner === "X") {
+          winnerText = PlayerX;
+         // setplX(plX + 1)
+        } else if ( winner === "O") {
+          winnerText = PlayerO;
+        } else {
+          winnerText = "No winner (DRAW)";
+        }
+
+
+    
+    
+ const status = winner ? `Winner: ${winnerText}` : `Next player: ${xIsNext ? PlayerX : PlayerO }` ;
+      
+     
       
        
       return (
@@ -78,6 +98,7 @@ const Square = props => {
             {renderSquare(7)}
             {renderSquare(8)}
           </div>
+          <button type="button" className="btn btn-outline-primary m-1" onClick={reset}>Restart</button>
         </div>
       );
     
@@ -106,7 +127,7 @@ const Square = props => {
 
 function calculateWinner(squares) {
     
-    const lines = [
+    const combinations = [
       [0, 1, 2],
       [3, 4, 5],
       [6, 7, 8],
@@ -120,7 +141,7 @@ function calculateWinner(squares) {
     // Iterate over all the winning line combinations to see if the 
     // input squares array has one of the with all 'X's or all 'O's.
     // If it does, return 'X' or 'O'.
-    for (let line of lines) {
+    for (let line of combinations) {
       const [a, b, c] = line;
       if (
         squares[a] && squares[a] === squares[b] && squares[a] === squares[c]
