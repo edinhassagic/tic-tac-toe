@@ -1,90 +1,91 @@
 body {
-    font: 14px "Century Gothic", Futura, sans-serif;
-    margin: 20px;
-    background-color: pink;
-  }
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+  background-color: pink;
+}
 
-  .form-group {
-    padding-top: 3rem;
-  }
-  
-  ol, ul {
-    padding-left: 30px;
-  }
+.form-group {
+  padding-top: 3rem;
+}
+
+ol, ul {
+  padding-left: 30px;
+}
 
 
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 44px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 74px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 74px;
   
-  .board-row:after {
-    clear: both;
-    content: "";
-    display: table;
-  }
+}
+
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
   
-  .status {
-    margin-bottom: 10px;
-    font-size: 18px;
-  }
+}
+
+.game-info {
+  margin-left: 20px;
+}
+.game-board {
+    padding: 200px;
+    padding-left: 50rem;
+}
+
+header{
+  position: fixed;
+  text-align: center;
+  width: 70%;
+  background-color: white;
+  color: black;
+  z-index: 999;
+  float: left;
   
-  .square {
-    background: #fff;
-    border: 1px solid #999;
-    float: left;
-    font-size: 44px;
-    font-weight: bold;
-    line-height: 34px;
-    height: 74px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 74px;
-    
-  }
   
-  .square:focus {
-    outline: none;
-  }
-  
-  .kbd-navigation .square:focus {
-    background: #ddd;
-  }
-  
-  .game {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    
-  }
-  
-  .game-info {
-    margin-left: 20px;
-  }
-  .game-board {
-      padding: 200px;
-      padding-left: 50rem;
-  }
-  
-  header{
-    position: fixed;
-    text-align: center;
-    width: 100%;
-    background-color: white;
-    color: black;
-    z-index: 999;
-    
-    
 }
 
 header {
-  top: 0;
-    height: 74px;
-    border-bottom: solid black 1px;
-    padding: 4px;
-    
+top: 0;
+  height: 74px;
+  border-bottom: solid black 1px;
+  padding: 4px;
+  
 }
 
 .navbar {
-  float: left;
+float: left;
 
 
 }

@@ -3,18 +3,17 @@ import Navbar from "./Navbar";
 
 
 const Square = props => {
-    
-      return (
-        <button className="square"
+     return (
+<button className="square"
         onClick = {props.onClick}
         >
           {props.value}
         </button>
-      );
-    
-  }
+          );
+    }
   
-  const Board = ({PlayerX , PlayerO}) => {
+  
+    const Board = ({PlayerX , PlayerO}) => {
       const initialSquares = Array(9).fill(null);
     const [squares, setSquares] = useState(initialSquares);
     const [xIsNext, setXIsNext] = useState(true)
@@ -30,23 +29,16 @@ const Square = props => {
         newSquares[i] = xIsNext ?  'X' : 'O';
         setSquares(newSquares);
         setXIsNext(!xIsNext);
-        
-        
-    };
+        };
     
     const reset = () => {
 setSquares(initialSquares)
 setXIsNext(PlayerX)
     }
 
-
-    
-    
     const renderSquare = i => {
       return (
-        
-
-       <Square value = {squares[i]} 
+      <Square value = {squares[i]} 
       onClick={ () => handleClick(i)} />
       );
     }
@@ -54,15 +46,12 @@ setXIsNext(PlayerX)
     const winner = calculateWinner(squares);
     let winnerText  = "X";
 
-    // const [plX, setplX] = useState(0)
-    /*
-    const [plY, setplY] = useState(0)
-    const [plDraw, setplDraw] = useState(0) */
+     // const [plX, setplX] = useState(0)
  
-        
+ 
         if (winner === "X") {
           winnerText = PlayerX;
-         // setplX(plX + 1)
+          // setplX(plX + 1)
         } else if ( winner === "O") {
           winnerText = PlayerO;
         } else {
