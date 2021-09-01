@@ -8,11 +8,10 @@ body {
   padding-top: 3rem;
 }
 
-ol, ul {
+ol,
+ul {
   padding-left: 30px;
 }
-
-
 
 .board-row:after {
   clear: both;
@@ -38,7 +37,6 @@ ol, ul {
   padding: 0;
   text-align: center;
   width: 74px;
-  
 }
 
 .square:focus {
@@ -53,18 +51,17 @@ ol, ul {
   display: flex;
   flex-direction: row;
   align-content: center;
-  
 }
 
 .game-info {
   margin-left: 20px;
 }
 .game-board {
-    padding: 200px;
-    padding-left: 50rem;
+  padding: 200px;
+  padding-left: 50rem;
 }
 
-header{
+header {
   position: fixed;
   text-align: center;
   width: 70%;
@@ -72,20 +69,19 @@ header{
   color: black;
   z-index: 999;
   float: left;
-  
-  
 }
 
 header {
-top: 0;
+  top: 0;
   height: 74px;
   border-bottom: solid black 1px;
   padding: 4px;
-  
 }
 
 .navbar {
-float: left;
+  float: left;
+}
 
-
+.history {
+  padding-top: 50%;
 }
