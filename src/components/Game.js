@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Navbar from "./Navbar";
 import { useEffect } from "react";
-import History  from "./History";
 
 const Square = (props) => {
   return (
@@ -32,8 +31,6 @@ const Board = ({ PlayerX, PlayerO }) => {
     setXIsNext(PlayerX);
   };
 
-  
-
   const renderSquare = (i) => {
     return <Square value={squares[i]} onClick={() => handleClick(i)} />;
   };
@@ -44,11 +41,9 @@ const Board = ({ PlayerX, PlayerO }) => {
   const [counterOne, setCounterOne] = useState(0);
   const [counterTwo, setCounterTwo] = useState(0);
   const [counterDraw, setCounterDraw] = useState(0);
- 
 
   if (winner === "X") {
     winnerText = PlayerX;
-    
   } else if (winner === "O") {
     winnerText = PlayerO;
   } else {
@@ -58,33 +53,12 @@ const Board = ({ PlayerX, PlayerO }) => {
   useEffect(() => {
     if (winner === "X") {
       setCounterOne((prev) => prev + 1);
-      
     } else if (winner === "O") {
       setCounterTwo((prev) => prev + 1);
-     
     } else if (winner === "No winner (DRAW)") {
       setCounterDraw((prev) => prev + 1);
     }
   }, [winner]);
-
-  /* useEffect(() => {
-    if (localStorage.getItem("firstPlayer")) {
-      setHistory(JSON.parse(localStorage.getItem("firstPlayer")))
-    }
-   
-  }, [])
-
-  useEffect(() => {
-     
-    localStorage.setItem("firstPlayer", JSON.stringify(history))
-    
-   
-  }, [history])
-
-  */
-  
-
-  
 
   const status = winner
     ? `Winner: ${winnerText}`
@@ -121,16 +95,7 @@ const Board = ({ PlayerX, PlayerO }) => {
       >
         Restart
       </button>
-      <div>
-        <History />
-         
-      </div>
-      <div>
-      
-      </div>
     </div>
-
-    
   );
 };
 
@@ -143,7 +108,6 @@ const Game = (props) => {
       <div className="game-board">
         <Board PlayerX={PlayerX} PlayerO={PlayerO} />
       </div>
-      
     </div>
   );
 };
