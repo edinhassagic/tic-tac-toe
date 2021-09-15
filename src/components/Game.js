@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "./Navbar";
 import { useEffect } from "react";
+import GameHistory from "./GameHistory";
 
 const Square = (props) => {
   return (
@@ -42,12 +43,25 @@ const Board = ({ PlayerX, PlayerO }) => {
   const [counterTwo, setCounterTwo] = useState(0);
   const [counterDraw, setCounterDraw] = useState(0);
 
+  if (winner) {
+    const date = new Date();
+    let result = `${date.getDate()}.${date.getMonth()} ${date.getHours()}:${date.getMinutes()}  ${PlayerX} vs ${PlayerO} : `;
+  
+
+
   if (winner === "X") {
+    result += `winner : ${PlayerX}`;
     winnerText = PlayerX;
   } else if (winner === "O") {
+    
+    result += `winner : ${PlayerO}`;
     winnerText = PlayerO;
   } else {
     winnerText = "No winner (DRAW)";
+    result += "DRAW"
+  }
+  const history = JSON.parse(localStorage.getItem('history')) || [] ;
+  localStorage.setItem('history', JSON.stringify([...history, result]))
   }
 
   useEffect(() => {
@@ -64,6 +78,11 @@ const Board = ({ PlayerX, PlayerO }) => {
     ? `Winner: ${winnerText}`
     : `Next player: ${xIsNext ? PlayerX : PlayerO}`;
 
+    
+
+    
+
+     
   return (
     <div>
       <Navbar
@@ -71,7 +90,9 @@ const Board = ({ PlayerX, PlayerO }) => {
         counterTwo={counterTwo}
         counterDraw={counterDraw}
       />
+       <div className="main">
 
+       
       <div className="status">{status}</div>
       <div className="board-row">
         {renderSquare(0)}
@@ -95,7 +116,9 @@ const Board = ({ PlayerX, PlayerO }) => {
       >
         Restart
       </button>
+      </div>
     </div>
+
   );
 };
 
@@ -103,16 +126,30 @@ const Game = (props) => {
   const PlayerX = localStorage.getItem("firstPlayer");
   const PlayerO = localStorage.getItem("secondPlayer");
 
+ const [gameHistory, setgameHistory] = useState([])
+
+ useEffect(() => {
+  const history = JSON.parse(localStorage.getItem('history')) || [] ;
+  setgameHistory(history);
+}, [])
+
+
+
   return (
     <div className="game">
-      <div className="game-board">
+      <div className="game-board left">
         <Board PlayerX={PlayerX} PlayerO={PlayerO} />
+        
       </div>
+      <div className="game-board right"> <GameHistory gameHistory={gameHistory} />
+       </div>
     </div>
   );
 };
 
 function calculateWinner(squares) {
+
+  
   const combinations = [
     [0, 1, 2],
     [3, 4, 5],

@@ -2,21 +2,21 @@ body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
   background-color: pink;
+  text-align: center;
+  
 }
 
 .form-group {
   padding-top: 3rem;
 }
 
-ol,
-ul {
-  padding-left: 30px;
-}
+
 
 .board-row:after {
   clear: both;
   content: "";
   display: table;
+  
 }
 
 .status {
@@ -37,6 +37,8 @@ ul {
   padding: 0;
   text-align: center;
   width: 74px;
+  
+  
 }
 
 .square:focus {
@@ -51,6 +53,7 @@ ul {
   display: flex;
   flex-direction: row;
   align-content: center;
+  
 }
 
 .game-info {
@@ -59,24 +62,27 @@ ul {
 .game-board {
   padding: 200px;
   padding-left: 50rem;
+  
 }
 
 header {
-  position: fixed;
+ 
   text-align: center;
-  width: 70%;
+  
+  width: 100%;
   background-color: white;
   color: black;
-  z-index: 999;
-  float: left;
-}
+  
+  position:fixed;
+  left: 0;
 
-header {
   top: 0;
   height: 74px;
   border-bottom: solid black 1px;
   padding: 4px;
 }
+
+
 
 .navbar {
   float: left;
@@ -85,3 +91,29 @@ header {
 .history {
   padding-top: 50%;
 }
+
+
+.main {
+ position: absolute;
+ left: 43%;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 400px) {
+ .square {
+   width: 30px;
+   height: 30px;
+   font-size: 50px;
+   text-align: left;
+ }
+  
+  }
+
