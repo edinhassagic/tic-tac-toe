@@ -7,7 +7,8 @@ const Square = (props) => {
   return (
     <button className="square" onClick={props.onClick}>
       {props.value}
-    </button>
+    </button> 
+    
   );
 };
 
@@ -25,6 +26,8 @@ const Board = ({ PlayerX, PlayerO }) => {
     newSquares[i] = xIsNext ? "X" : "O";
     setSquares(newSquares);
     setXIsNext(!xIsNext);
+    
+    
   };
 
   const reset = () => {
@@ -69,7 +72,7 @@ const Board = ({ PlayerX, PlayerO }) => {
       setCounterOne((prev) => prev + 1);
     } else if (winner === "O") {
       setCounterTwo((prev) => prev + 1);
-    } else if (winner === "No winner (DRAW)") {
+    } else if (winner === "D") {
       setCounterDraw((prev) => prev + 1);
     }
   }, [winner]);
@@ -126,10 +129,10 @@ const Game = (props) => {
   const PlayerX = localStorage.getItem("firstPlayer");
   const PlayerO = localStorage.getItem("secondPlayer");
 
- const [gameHistory, setgameHistory] = useState([])
+ const [gameHistory, setgameHistory] = useState()
 
  useEffect(() => {
-  const history = JSON.parse(localStorage.getItem('history')) || [] ;
+  const history = JSON.parse(localStorage.getItem('history'))  ;
   setgameHistory(history);
 }, [])
 
@@ -150,7 +153,7 @@ const Game = (props) => {
 function calculateWinner(squares) {
 
   
-  const combinations = [
+  const winnerLines = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -159,21 +162,18 @@ function calculateWinner(squares) {
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6],
-  ]; // shows all of the winning combinations ("lines")
-
-  // Iterate over all the winning line combinations to see if the
-  // input squares array has one of the with all 'X's or all 'O's.
-  // If it does, return 'X' or 'O'.
-  for (let line of combinations) {
-    const [a, b, c] = line;
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+  ];
+  let isDraw = true;
+  for (let i = 0; i < winnerLines.length; i++) {
+    const [a, b, c] = winnerLines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[b] === squares[c]) {
       return squares[a];
-    } else if (!squares.includes(null)) {
-      return "No winner (DRAW)";
+    }
+    if (!squares[a] || !squares[b] || !squares[c]) {
+      isDraw = false;
     }
   }
-  // If none of the winning line combinations is contained in
-  // input squares array, return null...
+  if (isDraw) return 'D';
   return null;
 }
 

@@ -16,6 +16,7 @@ body {
   clear: both;
   content: "";
   display: table;
+ 
   
 }
 
@@ -39,7 +40,10 @@ body {
   width: 74px;
   
   
+  
 }
+
+
 
 .square:focus {
   outline: none;
@@ -96,8 +100,8 @@ header {
 .main {
  position: absolute;
  left: 43%;
+ 
 }
-
 
 
 
