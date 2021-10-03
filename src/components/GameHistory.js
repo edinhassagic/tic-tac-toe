@@ -1,16 +1,12 @@
-import React from 'react';
+import React from "react";
 
-
-const GameHistory = ({gameHistory}) => {
-
-
-  
+const GameHistory = ({ gameHistory }) => {
   return (
     <div>
-    <h2> Game History:</h2>
-    {gameHistory && gameHistory.map(gh => <div>{gh}</div>)}
+      <h2> Game History:</h2>
+      {gameHistory && gameHistory.map((gh) => <div>{gh}</div>)}
     </div>
   );
-}
+};
 
 export default GameHistory;
