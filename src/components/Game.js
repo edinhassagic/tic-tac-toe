@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Navbar from './Navbar';
 import { useEffect } from 'react';
 import GameHistory from './GameHistory';
+import { useHistory } from 'react-router';
 
 const Square = props => {
   return (
@@ -31,6 +32,11 @@ const Board = ({ PlayerX, PlayerO,  setGameHistory }) => {
     setSquares(initialSquares);
     setXIsNext(PlayerX);
   };
+
+  let history = useHistory();
+  const newGame = () => {
+    history.push("/");
+  }
 
   const renderSquare = i => {
     return <Square value={squares[i]} onClick={() => handleClick(i)} />;
@@ -119,7 +125,14 @@ const Board = ({ PlayerX, PlayerO,  setGameHistory }) => {
           className='btn btn-outline-primary m-1'
           onClick={reset}
         >
-          Restart
+          Try again
+        </button>
+        <button
+          type='button'
+          className='btn btn-outline-primary m-1'
+          onClick={newGame}
+        >
+          Reset all
         </button>
       </div>
     </div>
