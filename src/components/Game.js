@@ -33,9 +33,11 @@ const Board = ({ PlayerX, PlayerO,  setGameHistory }) => {
     setXIsNext(PlayerX);
   };
 
+ 
   let history = useHistory();
   const newGame = () => {
     history.push("/");
+    localStorage.clear();
   }
 
   const renderSquare = i => {
@@ -97,6 +99,7 @@ const Board = ({ PlayerX, PlayerO,  setGameHistory }) => {
     : `Next player: ${xIsNext ? PlayerX : PlayerO}`;
 
   return (
+    
     <div>
       <Navbar
         counterOne={counterOne}
