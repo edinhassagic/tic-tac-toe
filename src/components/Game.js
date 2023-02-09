@@ -3,29 +3,37 @@ import Navbar from './Navbar';
 import { useEffect } from 'react';
 import GameHistory from './GameHistory';
 import { useHistory } from 'react-router';
+import { render } from 'react-dom';
 
 const Square = props => {
   return (
-    <button className='square' onClick={props.onClick}>
+    <button className='square' onClick={props.onClick}     >
       {props.value}
     </button>
   );
 };
 
+
+
 const Board = ({ PlayerX, PlayerO,  setGameHistory }) => {
   const initialSquares = Array(9).fill(null);
   const [squares, setSquares] = useState(initialSquares);
   const [xIsNext, setXIsNext] = useState(true);
+ 
 
   const handleClick = i => {
+    
     const newSquares = [...squares];
     const winnerDeclared = Boolean(calculateWinner(newSquares));
     const squareAlreadyFilled = Boolean(newSquares[i]);
     if (winnerDeclared || squareAlreadyFilled) return;
+    
 
     newSquares[i] = xIsNext ? 'X' : 'O';
     setSquares(newSquares);
     setXIsNext(!xIsNext);
+    
+    
   };
 
   const reset = () => {
@@ -39,6 +47,7 @@ const Board = ({ PlayerX, PlayerO,  setGameHistory }) => {
     history.push("/");
     localStorage.clear();
   }
+  
 
   const renderSquare = i => {
     return <Square value={squares[i]} onClick={() => handleClick(i)} />;
@@ -98,6 +107,7 @@ const Board = ({ PlayerX, PlayerO,  setGameHistory }) => {
     ? `Winner: ${winnerText}`
     : `Next player: ${xIsNext ? PlayerX : PlayerO}`;
 
+    
   return (
     
     <div>
@@ -109,7 +119,7 @@ const Board = ({ PlayerX, PlayerO,  setGameHistory }) => {
       <div className='main'>
         <div className='status'>{status}</div>
         <div className='board-row'>
-          {renderSquare(0)}
+          {renderSquare(0)} 
           {renderSquare(1)}
           {renderSquare(2)}
         </div>
@@ -163,7 +173,7 @@ const Game = props => {
           setGameHistory={setgameHistory}
         />
       </div>
-      <div className='game-board right'>
+      <div className='game-board-right'>
         {' '}
         <GameHistory gameHistory={gameHistory} />
       </div>

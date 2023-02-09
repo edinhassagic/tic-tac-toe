@@ -55,7 +55,8 @@ body {
 
 .game {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 20rem;
   align-content: center;
   
 }
@@ -68,6 +69,8 @@ body {
   padding-left: 50rem;
   
 }
+
+
 
 header {
  
