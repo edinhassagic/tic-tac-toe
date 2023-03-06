@@ -11,11 +11,12 @@ const Navbar = ({ counterOne, counterTwo, counterDraw }) => {
   return (
     <header>
       <div className="navbar">
-        <p>Tic Tac Toe</p>
-      </div>
+        <div>Tic Tac Toe</div>
+      
       <div>{pl1}</div>
       <div>{pl2}</div>
       <div>{draw}</div>
+      </div>
     </header>
   );
 };

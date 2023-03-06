@@ -1,6 +1,6 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
+ 
   background-color: pink;
   text-align: center;
   
@@ -56,9 +56,11 @@ body {
 .game {
   display: flex;
   flex-direction: column;
-  gap: 20rem;
-  align-content: center;
-  
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  height: 100vh;
 }
 
 .game-info {
@@ -92,18 +94,23 @@ header {
 
 
 .navbar {
-  float: left;
+  display: flex;
+ justify-content: center;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 30px;
 }
 
 .history {
   padding-top: 50%;
 }
 
-
-.main {
- position: absolute;
- left: 43%;
- 
+@media (max-width: 560px) {
+.navbar {
+  font-size: 15px;
+}
 }
 
 
@@ -114,13 +121,5 @@ header {
 
 
 
-@media screen and (max-width: 400px) {
- .square {
-   width: 30px;
-   height: 30px;
-   font-size: 50px;
-   text-align: left;
- }
-  
-  }
+
 

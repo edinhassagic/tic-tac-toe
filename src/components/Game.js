@@ -117,6 +117,7 @@ const Board = ({ PlayerX, PlayerO,  setGameHistory }) => {
         counterDraw={counterDraw}
       />
       <div className='main'>
+        <div className='container'>
         <div className='status'>{status}</div>
         <div className='board-row'>
           {renderSquare(0)} 
@@ -149,6 +150,7 @@ const Board = ({ PlayerX, PlayerO,  setGameHistory }) => {
         </button>
       </div>
     </div>
+    </div>
   );
 };
 
@@ -164,8 +166,10 @@ const Game = props => {
   }, []);
 
   return (
+    <div className='container'>
     <div className='game'>
-      <div className='game-board left'>
+      <div 
+      >
         <Board
           PlayerX={PlayerX}
           PlayerO={PlayerO}
@@ -173,10 +177,11 @@ const Game = props => {
           setGameHistory={setgameHistory}
         />
       </div>
-      <div className='game-board-right'>
+      <div >
         {' '}
         <GameHistory gameHistory={gameHistory} />
       </div>
+    </div>
     </div>
   );
 };
